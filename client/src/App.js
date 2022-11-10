@@ -39,6 +39,8 @@ function App() {
 
   return (
     <div className='App'>
+         <span className="column1" >
+
       <h1>REGISTRATION</h1>
       <div className='registration'>
         <input 
@@ -90,6 +92,11 @@ function App() {
         <button onClick={login}>Login</button>
         <h1>{loginStatus}</h1>
       </div>
+  </span>
+  <span className="column2" >
+    <h2>Publication Process <br/> Management System</h2>
+    <br></br>
+  </span>
     </div>
   );
 }
