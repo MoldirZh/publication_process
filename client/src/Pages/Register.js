@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../Styles/App.css';
 import '../Styles/Register.css';
 import Axios from 'axios';
+import LoginRegister from "./LoginRegister.png"
 
 function Register() {
 
@@ -22,9 +23,9 @@ function Register() {
     }
 
     return (
-        <div className='registration'>
-            <h1>REGISTRATION</h1>
-            <div>
+        <div className='register'>
+            <div className='registerleft'>
+                <h1>REGISTRATION</h1>
                 <input
                     type='text'
                     placeholder='First name'
@@ -54,6 +55,10 @@ function Register() {
                     }}
                 />
                 <button onClick={register}>Register</button>
+            </div>
+            <div className='registerright'>
+                <img id="registerImg" src={LoginRegister} alt="The Pulpit Rock" width="100%" height="100%">
+                </img>
             </div>
         </div>
     );
