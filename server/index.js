@@ -1,3 +1,11 @@
+/*const express = require("express");
+const app = express();
+const PORT = 3001;
+
+const UserRoute = require('./routes/User');
+
+app.use('/user', UserRoute);*/
+
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
@@ -51,4 +59,4 @@ app.post("/login", (req, res) => {
 
 app.listen(3001, () => {
     console.log("running");
-}) 
+})
