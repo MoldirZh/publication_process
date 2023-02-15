@@ -2,12 +2,25 @@ import React, { useState } from 'react';
 import '../Styles/App.css';
 import '../Styles/Upload.css';
 import Axios from 'axios';
+import Popup from '../Components/Popup';
+import UploadForm from './UploadForm';
+import {makeStyles, Paper} from '@material-ui/core'
 
+
+const useStyles = makeStyles(theme=>({
+    pageContent:{
+        margin: theme.spacing(5),
+        padding: theme.spacing(3)
+    }
+}))
 function Upload() {
 
     const onFileChange = (e) => {
         console.log(e.target.files[0]);
     }
+
+    const[openPopup, setOpenPopup] = useState(false)
+    const classes =  useStyles();
 
     return (
         <div className='upload'>
@@ -63,7 +76,7 @@ function Upload() {
                 <div className='uploadForm'>
                     <h1>Upload New Work</h1>
                     <h2> Works can be uploaded in different formats, including PDF, Word, LaTeX</h2>
-                    <input
+                    {/* <input
                         className='input'
                         // style=""
                         type="file"
@@ -71,8 +84,21 @@ function Upload() {
                         onChange={onFileChange}
                         accept="application/pdf, .doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, .tex"
                     />
-                    <button class="buttonUpload">Upload</button>
+                    <button class="buttonUpload">Upload</button> */}
                 </div>
+            
+            <Popup                     
+                openPopup = {openPopup}
+                setOpenPopup = {setOpenPopup}
+            >
+                <UploadForm/>
+           </Popup>
+
+            <div>
+                <button class="buttonUpload" onClick={()=>setOpenPopup(true)}>Upload</button>
+            </div>
+
+
             <div className='submitForm'>
             <h1>Submit Copyright form</h1>
             <input
