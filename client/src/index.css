@@ -1,0 +1,200 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    background-color: #F1F3F6; 
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color:  #6F38C5;
+}
+
+/* body {
+    min-height: 100vh;
+    background-color: #F1F3F6; 
+} */
+
+ 
+
+.App {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: left;
+  min-height: 100vh; 
+  padding: 1rem 0.5rem;
+  border: 15.1459px solid #6F38C5;
+  box-shadow: 0px 0px 200px rgba(0, 0, 0, 0.2);
+  border-radius: 50.4863px;
+  position: relative;
+
+  /* font-size: 20px; */
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  outline-offset: 0.5em; 
+  gap: 0;
+}
+
+/* .col {
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: left;
+  min-height: 100vh; 
+  padding: 1rem 0.5rem;
+  position: fixed;
+  outline-offset: 100%;
+  background-color: aqua;
+  margin:20px;
+  border-radius: 50.4863px;
+
+} */
+
+.column1 {
+    display: flex;
+    flex: 20%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 30px;
+    font-size:100%;
+    /* padding: none; */
+    background-color: #fff;
+    min-height: 100%; 
+    padding: 1rem 0.5rem;
+    /* box-shadow: 0px 0px 200px rgba(0, 0, 0, 0.2); */
+    border-radius: 50.4863px 0 0 50.4863px;
+    position: center;
+    margin:0;
+  }
+  .column2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 60%;
+    padding: none;
+    background-color: white;
+    min-height: 100vh; 
+    padding: 1rem 0.5rem;
+    border-radius: 0 50.4863px  50.4863px 0;
+    font-size:50px;
+  }
+  
+section {
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.4);
+
+/* position: absolute;
+width: 213px;
+height: 54px;
+font-family: 'Crimson Pro';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 27px;
+color: #6F38C5; */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+a, a:visited {
+    color: #fff;
+}
+
+input[type="text"],
+input[type="password"],
+button,
+textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+label,
+button {
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.5rem;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}
