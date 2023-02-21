@@ -1,62 +1,52 @@
-/*const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+import fileUpload from "express-fileupload";
+
+import projectsRoute from "./routes/projects.js";
+import papersRoute from "./routes/papers.js";
+import authRoute from "./routes/auth.js";
+import usersRoute from "./routes/users.js";
+
 const app = express();
-const PORT = 3001;
+dotenv.config();
+mongoose.set("strictQuery", false);
 
-const UserRoute = require('./routes/User');
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO);
+    console.log("Connected to mongoDB.");
+  } catch (error) {
+    throw error;
+  }
+};
 
-app.use('/user', UserRoute);*/
+mongoose.connection.on("disconnected", () => {
+  console.log("mongoDB disconnected!");
+});
 
-const express = require("express");
-const cors = require("cors");
-const mysql = require("mysql");
-const app = express();
-
+//middlewares
+app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(fileUpload());
+app.use("/server/auth", authRoute);
+app.use("/server/users", usersRoute);
+app.use("/server/projects", projectsRoute);
+app.use("/server/papers", papersRoute);
 
-const db = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "password",
-    database: "publication",
-})
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const erroMessage = err.message || "Something went wrong";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: erroMessage,
+    stack: err.stack,
+  });
+});
 
-app.post("/register", (req, res) => {
-
-    const email = req.body.email;
-    const password = req.body.password;
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-
-    db.query(
-        "INSERT INTO users (email, password, firstName, lastName) VALUES (?,?,?,?)",
-        [email, password, firstName, lastName], 
-        (err, result) => {
-            console.log("insert", err, result);
-        }
-    );
-})
-
-app.post("/login", (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-
-    db.query(
-        "SELECT * FROM users WHERE email = ? AND password = ?",
-        [email, password], 
-        (err, result) => {
-            if(err) {
-                res.send({ err: err  })
-            }
-            if(result.length > 0) {
-                res.send(result);
-            } else {
-                res.send({ message: "Wrong email/password" })
-            }
-        }
-    );
-})
-
-app.listen(3001, () => {
-    console.log("running");
-})
+app.listen(8080, () => {
+  connect();
+  console.log("Connected to backend.");
+});

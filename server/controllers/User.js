@@ -1,23 +1,47 @@
-import {
-    QueryListOfUsers,
-    QueryUserById,
-    DeleteUserById
-} from "../service/UserTable";
+import User from "../models/User.js";
 
-export const GetAllUsers = (res, req) => {
-    const userList = QueryListOfUsers();
-    return res.json(userList);
-}
+export const updateUser = async (req, res, next) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+};
 
-export const GetUser = (res, req) => {
-    const userId = req.params.id;
-    const user = QueryUserById(userId);
-    return res.json(user);
-}
+export const deleteUser = async (req, res, next) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json("User has been deleted.");
+  } catch (err) {
+    next(err);
+  }
+};
 
-export const DeleteUser = (res, req) => {
-    const userId = req.params.id;
-    const user = DeleteUserById(userId);
-    return res.json(user);
-}
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    await User.findById(req.params.id);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
 
+export const getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    await User.find(req.params.id);
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
+};
