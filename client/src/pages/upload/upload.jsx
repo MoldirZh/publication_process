@@ -7,7 +7,7 @@ import Navbar from "../../components/navbar/Navbar";
 
 function Upload() {
   const onFileChange = (e) => {
-    console.log(e.target.files[0]);
+    //console.log(e.target.files[0]);
   };
 
   const [nameOfTheWork, setNameOfTheWork] = useState("");
@@ -19,7 +19,6 @@ function Upload() {
       <Navbar />
       <div className="uploads">
         <div className="uploadleft">
-          {/* Works */}
           <table id="uploadTable">
             <tr>
               <td>Works</td>
@@ -31,10 +30,6 @@ function Upload() {
                 Name:
               </td>
               <td>In progress</td>
-            </tr>
-            <tr>
-              <td>...</td>
-              <td>...</td>
             </tr>
             <tr>
               <td>...</td>
@@ -62,30 +57,13 @@ function Upload() {
               Works can be uploaded in different formats, including PDF, Word,
               LaTeX
             </h2>
-            {/* <input
-                        className='input'
-                        // style=""
-                        type="file"
-                        name="file_upload"
-                        onChange={onFileChange}
-                        accept="application/pdf, .doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, .tex"
-                    />
-                    <button class="buttonUpload">Upload</button> */}
-            {/* <button class="buttonUpload" onClick={()=>setOpenPopup(true)}>Upload New Work</button> */}
-            <ModalWindow></ModalWindow>
+            <ModalWindow />
           </div>
 
           <div></div>
 
           <div className="submitForm">
-            {/* <input
-                type="file"
-                name="file_upload"
-                onChange={onFileChange}
-                accept="application/pdf, .doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, .tex"
-            />
-            <button class="buttonSubmit">Upload Copyright form</button> */}
-            <ModalCopyrightForm></ModalCopyrightForm>
+            <ModalCopyrightForm />
           </div>
         </div>
       </div>
