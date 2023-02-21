@@ -6,12 +6,22 @@ import "./upload.css";
 const ModalWindow = () => {
   const classes = useStyles();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [nameOfTheWork, setNameOfTheWork] = useState("");
-  const [description, setDescription] = useState("");
-  const [authors, setAuthors] = useState("");
-  const onFileChange = (e) => {
-    console.log(e.target.files[0]);
+
+  const [uploadName, setUploadName] = useState("");
+  const [uploadDesc, setUploadDesc] = useState("");
+  const [uploadAuthors, setUploadAuthors] = useState("");
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", uploadName);
+    formData.append("desc", uploadDesc);
+    formData.append("desc", uploadAuthors);
+    formData.append("pdfFile", uploadedFile);
+    console.log(formData);
   };
+
   return (
     <div>
       <button className="buttonUpload" onClick={() => setModalIsOpen(true)}>
@@ -20,50 +30,57 @@ const ModalWindow = () => {
       <Modal
         className={classes.root}
         isOpen={modalIsOpen}
+        ariaHideApp={false}
         onRequestClose={() => setModalIsOpen(false)}
       >
         <h2>Upload your work here:</h2>
         <div className={classes.inputs}>
-          <div>
-            <h3>Name of the work</h3>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <h3>Name of the work</h3>
+              <input
+                type="text"
+                placeholder="Name of the Work"
+                value={uploadName}
+                onChange={(e) => {
+                  setUploadName(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <h3>Description</h3>
+              <input
+                type="text"
+                placeholder="Description"
+                value={uploadDesc}
+                onChange={(e) => {
+                  setUploadDesc(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <h3>Authors</h3>
+              <input
+                type="text"
+                placeholder="Authors"
+                value={uploadAuthors}
+                onChange={(e) => {
+                  setUploadAuthors(e.target.value);
+                }}
+              />
+            </div>
             <input
-              type="text"
-              placeholder="Name of the Work"
-              onChange={(e) => {
-                setNameOfTheWork(e.target.value);
-              }}
+              className="input"
+              type="file"
+              name="file_upload"
+              onChange={(e) => setUploadedFile(e.target.files[0])}
+              accept="application/pdf, .doc, .docx, .zip"
             />
-          </div>
-          <div>
-            <h3>Description</h3>
-            <input
-              type="text"
-              placeholder="Description"
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <h3>Authors</h3>
-            <input
-              type="text"
-              placeholder="Authors"
-              onChange={(e) => {
-                setAuthors(e.target.value);
-              }}
-            />
-          </div>
-          <input
-            className="input"
-            type="file"
-            name="file_upload"
-            onChange={onFileChange}
-            accept="application/pdf, .doc, .docx, .zip"
-          />
+            <input type="submit" className={classes.buttons} />
+          </form>
         </div>
-        <button className={classes.buttons}>Upload PDF</button>
-        <button className={classes.buttons}>Upload Original</button>
+        {/* <button className={classes.buttons}>Upload PDF</button> */}
+        {/* <button className={classes.buttons}>Upload Original</button> */}
 
         <div>
           <button onClick={() => setModalIsOpen(false)}>Close</button>

@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import "./upload.css";
-import Axios from "axios";
+import axios from "axios";
+import useFetch from "../../hooks/useFetch.js";
 import ModalWindow from "./UploadNewWorkModal";
 import ModalCopyrightForm from "./UploadCopyrightForm";
 import Navbar from "../../components/navbar/Navbar";
 
 function Upload() {
-  const onFileChange = (e) => {
-    //console.log(e.target.files[0]);
-  };
-
-  const [nameOfTheWork, setNameOfTheWork] = useState("");
-  const [description, setDescription] = useState("");
-  const [authors, setAuthors] = useState("");
+  const { data, loading, error } = useFetch("/server/papers");
 
   return (
     <div>
@@ -21,20 +16,27 @@ function Upload() {
         <div className="uploadleft">
           <table id="uploadTable">
             <tr>
-              <td>Works</td>
-              <td>Progress</td>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Authors</th>
+              <th>Progress</th>
+              <th>Open file</th>
             </tr>
-            <tr>
-              <td>
-                Work # <br />
-                Name:
-              </td>
-              <td>In progress</td>
-            </tr>
-            <tr>
-              <td>...</td>
-              <td>...</td>
-            </tr>
+            {data &&
+              data.map((elem) => {
+                console.log(elem);
+                return (
+                  <tr key={elem._id}>
+                    <td>{elem.name}</td>
+                    <td>{elem.desc}</td>
+                    <th>{elem.authors}</th>
+                    <td>{elem.status}</td>
+                    <td>
+                      <button>Open</button>
+                    </td>
+                  </tr>
+                );
+              })}
           </table>
         </div>
         <div className="uploadright">
@@ -59,8 +61,6 @@ function Upload() {
             </h2>
             <ModalWindow />
           </div>
-
-          <div></div>
 
           <div className="submitForm">
             <ModalCopyrightForm />
