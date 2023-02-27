@@ -23,7 +23,9 @@ const paperSchema = new mongoose.Schema(
       required: true,
     },
     sources: {},
-    copyright: {},
+    copyright: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./upload.css";
-import axios from "axios";
 import useFetch from "../../hooks/useFetch.js";
 import ModalWindow from "./UploadNewWorkModal";
 import ModalCopyrightForm from "./UploadCopyrightForm";
@@ -8,6 +7,12 @@ import Navbar from "../../components/navbar/Navbar";
 
 function Upload() {
   const { data, loading, error } = useFetch("/server/papers");
+
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isCopyrightModalOpen, setIsCopyrightModalOpen] = useState(false);
+  const openPdf = (data) => {
+    window.open(data.pdfFile, "_blank");
+  };
 
   return (
     <div>
@@ -24,7 +29,6 @@ function Upload() {
             </tr>
             {data &&
               data.map((elem) => {
-                console.log(elem);
                 return (
                   <tr key={elem._id}>
                     <td>{elem.name}</td>
@@ -32,7 +36,7 @@ function Upload() {
                     <th>{elem.authors}</th>
                     <td>{elem.status}</td>
                     <td>
-                      <button>Open</button>
+                      <button onClick={() => openPdf(elem)}>Open</button>
                     </td>
                   </tr>
                 );
@@ -59,11 +63,17 @@ function Upload() {
               Works can be uploaded in different formats, including PDF, Word,
               LaTeX
             </h2>
-            <ModalWindow />
+            <ModalWindow
+              isUploadModalOpen={isUploadModalOpen}
+              setIsUploadModalOpen={setIsUploadModalOpen}
+            />
           </div>
 
           <div className="submitForm">
-            <ModalCopyrightForm />
+            <ModalCopyrightForm
+              isCopyrightModalOpen={isCopyrightModalOpen}
+              setIsCopyrightModalOpen={setIsCopyrightModalOpen}
+            />
           </div>
         </div>
       </div>

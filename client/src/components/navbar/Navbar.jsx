@@ -7,36 +7,12 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navContainer">
-        <span className="logo">Publication</span>
-        <div className="navItems">
-          <button
-            className="navButton"
-            style={{ backgroundColor: "#6F38C5", color: "white" }}
-            onClick={() => {
-              navigate("/register");
-            }}
-          >
-            Register
-          </button>
-          <button
-            className="navButton"
-            style={{ backgroundColor: "#6F38C5", color: "white" }}
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Login
-          </button>
-          <button
-            className="navButton"
-            style={{ backgroundColor: "#6F38C5", color: "white" }}
-            onClick={() => {
-              navigate("/upload");
-            }}
-          >
-            Upload
-          </button>
-        </div>
+        <span className="logo" onClick={() => navigate("/")}>
+          Logo
+        </span>
+        <button className="navButton" onClick={() => navigate("/login")}>
+          Login/Sign up
+        </button>
       </div>
     </div>
   );

@@ -1,1 +1,73 @@
+.home {
+  display: flex;
+  justify-content: center;
+}
 
+.homeContainer {
+  width: 100%;
+  max-width: 2400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.homeImgContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #e5eafd;
+}
+
+.homeImg {
+  height: 40vh;
+}
+
+.homeContainer > button {
+  background-color: white;
+  color: #6f38c5;
+  border: 3px solid #6f38c5;
+  padding: 15px 80px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.servicesWrapper {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  color: #6f38c5;
+  border: 1px solid #6f38c5;
+  padding: 20px 40px;
+}
+
+.servicesTitle > h1 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.servicesList {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20%;
+}
+
+.serviceItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.serviceImg {
+  height: 200px;
+}
+
+.serviceName {
+  text-align: center;
+  font-size: 20px;
+}

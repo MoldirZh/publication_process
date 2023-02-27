@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { useStyles } from "../../hooks/useStyles";
 import "./upload.css";
+import axios from "axios";
 
-const ModalWindow = () => {
+import { storage } from "../../utils/firebase.js";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+
+const ModalWindow = (props) => {
   const classes = useStyles();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { isUploadModalOpen, setIsUploadModalOpen } = props;
 
   const [uploadName, setUploadName] = useState("");
   const [uploadDesc, setUploadDesc] = useState("");
@@ -14,24 +19,43 @@ const ModalWindow = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", uploadName);
-    formData.append("desc", uploadDesc);
-    formData.append("desc", uploadAuthors);
-    formData.append("pdfFile", uploadedFile);
-    console.log(formData);
+
+    if (uploadedFile == null) return;
+
+    const fileRef = ref(storage, `papers/${uploadedFile + v4()}`);
+
+    uploadBytes(fileRef, uploadedFile).then(() => {
+      getDownloadURL(fileRef).then((url) => {
+        const formData = new FormData();
+        formData.append("name", uploadName);
+        formData.append("desc", uploadDesc);
+        formData.append("authors", uploadAuthors);
+        formData.append("pdfFile", url);
+        axios
+          .post("/server/papers", formData)
+          .then((res) => {
+            setIsUploadModalOpen(false);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    });
   };
 
   return (
     <div>
-      <button className="buttonUpload" onClick={() => setModalIsOpen(true)}>
+      <button
+        className="buttonUpload"
+        onClick={() => setIsUploadModalOpen(true)}
+      >
         Upload New Work
       </button>
       <Modal
         className={classes.root}
-        isOpen={modalIsOpen}
         ariaHideApp={false}
-        onRequestClose={() => setModalIsOpen(false)}
+        isOpen={isUploadModalOpen}
+        onRequestClose={() => setIsUploadModalOpen(false)}
       >
         <h2>Upload your work here:</h2>
         <div className={classes.inputs}>
@@ -83,7 +107,7 @@ const ModalWindow = () => {
         {/* <button className={classes.buttons}>Upload Original</button> */}
 
         <div>
-          <button onClick={() => setModalIsOpen(false)}>Close</button>
+          <button onClick={() => setIsUploadModalOpen(false)}>Close</button>
         </div>
       </Modal>
     </div>
