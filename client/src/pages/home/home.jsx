@@ -2,8 +2,10 @@ import React from "react";
 import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
   return (
     <div>
       <Navbar />
@@ -15,7 +17,9 @@ const Home = () => {
               className="homeImg"
             />
           </div>
-          <button>SHOW RECENT PUBLISHED WORKS</button>
+          <button onClick={() => navigate("/projects")}>
+            SHOW RECENT PUBLISHED WORKS
+          </button>
           <div className="servicesWrapper">
             <div className="servicesTitle">
               <h1>SERVICES WE PROVIDE</h1>
