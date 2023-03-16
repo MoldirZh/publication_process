@@ -1,53 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/Footer";
 import "./loginRegister.css";
-import Axios from "axios";
+import axios from "axios";
 import loginRegister from "../../images/loginRegister.png";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 function Login() {
+  const [credentials, setCredentials] = useState({
+    email: undefined,
+    password: undefined,
+  });
+
+  const { loading, error, dispatch } = useContext(AuthContext);
+
   let navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const [loginStatus, setLoginStatus] = useState("");
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
 
-  const login = () => {
-    Axios.post("http://127.0.0.1:3001/login", {
-      email: email,
-      password: password,
-    }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-      } else {
-        setLoginStatus(response.data[0].email);
-      }
-    });
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("/server/auth/login", credentials);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      navigate("/");
+    } catch (err) {
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+    }
   };
 
   return (
-    <div className="container">
-      <div className="leftWrapper">
-        <h1>LOGIN</h1>
-        <input
-          type="text"
-          placeholder="Email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button onClick={login}>Login</button>
-        <div className="divider">OR</div>
-        <button onClick={() => navigate("/register")}>Sign up</button>
-      </div>
-      <div className="rightWrapper">
-        <img src={loginRegister} alt="Login image"></img>
+    <div>
+      <Navbar />
+      <div className="container">
+        <div className="leftWrapper">
+          <h1>LOGIN</h1>
+          <input
+            type="text"
+            placeholder="Email"
+            id="email"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            id="password"
+            onChange={handleChange}
+          />
+          <button disabled={loading} onClick={handleClick}>
+            Login
+          </button>
+          <div className="divider">OR</div>
+          <button onClick={() => navigate("/register")}>Sign up</button>
+        </div>
+        <div className="rightWrapper">
+          <img src={loginRegister} alt="Login image"></img>
+        </div>
+        <Footer />
       </div>
     </div>
   );
