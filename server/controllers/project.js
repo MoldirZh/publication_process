@@ -56,3 +56,16 @@ export const getProjects = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getRecentPublications = async (req, res, next) => {
+  try {
+    const recentPublications = await Project.find({
+      $and: [{ isPublic: true }, { progress: "Completed" }],
+    });
+
+    await Project.find(req.params.id);
+    res.status(200).json(recentPublications);
+  } catch (err) {
+    next(err);
+  }
+};

@@ -20,7 +20,7 @@ const paperSchema = new mongoose.Schema(
     },
     pdfFile: {
       type: String,
-      required: true,
+      // required: true,
     },
     sources: {},
     copyright: {

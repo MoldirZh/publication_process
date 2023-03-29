@@ -15,6 +15,9 @@ const projectSchema = new mongoose.Schema(
       required: true,
       default: "Awaiting", //In progress, Completed
     },
+    isPublic: {
+      type: Boolean,
+    },
     papers: {
       type: [String],
     },
