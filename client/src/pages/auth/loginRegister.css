@@ -1,15 +1,15 @@
 .container {
+  margin: 0 0 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-bottom: 60px;
   border-top: 5px solid #6f38c5;
 }
 
 .leftWrapper {
   display: flex;
-  flex: 20%;
+  flex: 30%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -19,14 +19,26 @@
 }
 
 .leftWrapper input,
-.leftWrapper button {
+.leftWrapper button,
+.leftWrapper select {
   border-radius: 20px;
 }
 
 .leftWrapper input {
   padding: 15px;
-  width: 80%;
+  width: 300px;
   font-size: 20px;
+}
+
+.leftWrapper select {
+  padding: 15px 10px;
+  width: 330px;
+  font-size: 20px;
+  border: 2px solid black;
+}
+
+.leftWrapper select:invalid {
+  color: gray;
 }
 
 .leftWrapper button {
@@ -48,13 +60,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 60%;
+  flex: 70%;
   padding: none;
   background-color: #f1f3f6;
-  height: 85vh;
-  padding: 1rem 0.5rem;
+  height: 1100px;
 }
 
 .rightWrapper > img {
-  width: 100%;
+  width: 1000px;
+  height: 1000px;
 }

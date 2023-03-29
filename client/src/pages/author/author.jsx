@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch.js";
-// import ModalWindow from "./UploadNewWorkModal";
 import Navbar from "../../components/navbar/Navbar";
 import "./author.css";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Author() {
   const { data, loading, error } = useFetch("/server/papers");
-
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-  const [isCopyrightModalOpen, setIsCopyrightModalOpen] = useState(false);
   const openPdf = (data) => {
     window.open(data.pdfFile, "_blank");
   };
@@ -22,10 +16,15 @@ function Author() {
       <Navbar />
       <div className="author">
         <div className="tablePart">
-            {/* <h2>New Invitations</h2>
+          {/* <h2>New Invitations</h2>
             <h3 style={{fontWeight:"normal"}}>Click to edit the status of the project</h3> */}
-            <br/>
-            <button className="newInvitations" onClick={() => navigate("/newInvitations")}>New Invitations</button>
+          <br />
+          <button
+            className="newInvitations"
+            onClick={() => navigate("/newInvitations")}
+          >
+            New Invitations
+          </button>
           <table id="table">
             <tr>
               <th>Project#</th>
@@ -57,7 +56,6 @@ function Author() {
               })}
           </table>
         </div>
-      
       </div>
     </div>
   );

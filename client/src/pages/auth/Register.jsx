@@ -1,27 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import "./loginRegister.css";
 import axios from "axios";
-import loginRegister from "../../images/loginRegister.png";
+import loginRegisterImg from "../../images/loginRegister.png";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 function Register() {
-  const [firstNameReg, setFirstNameReg] = useState("");
-  const [lastNameReg, setLastNameReg] = useState("");
-  const [emailReg, setEmailReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
+  const [credentials, setCredentials] = useState({
+    username: undefined,
+    email: undefined,
+    isEditor: undefined,
+    password: undefined,
+  });
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const register = () => {
-    axios
-      .post("http://127.0.0.1:3001/register", {
-        firstName: firstNameReg,
-        lastName: lastNameReg,
-        email: emailReg,
-        password: passwordReg,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+  const { loading, error, dispatch } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setErrorMsg("");
+    e.target.type === "select-one"
+      ? setCredentials((prev) => ({
+          ...prev,
+          isEditor: e.target.value === "editor",
+        }))
+      : setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const register = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("/server/auth/register", credentials);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      navigate("/");
+    } catch (err) {
+      if (err.response.data.message.includes("validation"))
+        setErrorMsg("Fill all the fields");
+      else if (err.response.data.message.includes("duplicate"))
+        setErrorMsg("The username or email is not unique");
+      else setErrorMsg("Error");
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+    }
   };
 
   return (
@@ -31,40 +54,45 @@ function Register() {
         <div className="leftWrapper">
           <h1>REGISTRATION</h1>
           <input
+            required
             type="text"
-            placeholder="First name"
-            onChange={(e) => {
-              setFirstNameReg(e.target.value);
-            }}
+            placeholder="username"
+            id="username"
+            onChange={handleChange}
           />
           <input
+            required
             type="text"
-            placeholder="Last name"
-            onChange={(e) => {
-              setLastNameReg(e.target.value);
-            }}
+            placeholder="email"
+            id="email"
+            onChange={handleChange}
           />
+          <select required id="role" onChange={handleChange}>
+            <option value="" disabled selected hidden>
+              Role
+            </option>
+            <option value="editor">Editor</option>
+            <option value="author">Author</option>
+          </select>
           <input
-            type="text"
-            placeholder="Email"
-            onChange={(e) => {
-              setEmailReg(e.target.value);
-            }}
+            required
+            type="password"
+            placeholder="password"
+            id="password"
+            onChange={handleChange}
           />
-          <input
-            type="text"
-            placeholder="Password"
-            onChange={(e) => {
-              setPasswordReg(e.target.value);
-            }}
-          />
-          <button onClick={register}>Register</button>
+          {errorMsg !== "" && <div className="errorMsg">{errorMsg}</div>}
+          <button disabled={loading} onClick={register}>
+            Register
+          </button>
+          <div className="divider">OR</div>
+          <button onClick={() => navigate("/login")}>Login</button>
         </div>
         <div className="rightWrapper">
-          <img src={loginRegister} alt="Register image"></img>
+          <img src={loginRegisterImg} alt="Register"></img>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }

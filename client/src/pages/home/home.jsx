@@ -17,7 +17,7 @@ const Home = () => {
               className="homeImg"
             />
           </div>
-          <button onClick={() => navigate("/projects")}>
+          <button onClick={() => navigate("/recentPublications")}>
             SHOW RECENT PUBLISHED WORKS
           </button>
           <div className="servicesWrapper">
@@ -53,9 +53,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <Footer />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

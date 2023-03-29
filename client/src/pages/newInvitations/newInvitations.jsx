@@ -4,7 +4,6 @@ import useFetch from "../../hooks/useFetch.js";
 import Navbar from "../../components/navbar/Navbar";
 import "./newInvitations.css";
 
-
 function NewInvitations() {
   const { data, loading, error } = useFetch("/server/papers");
 
@@ -19,10 +18,10 @@ function NewInvitations() {
       <Navbar />
       <div className="newInvitations">
         <div className="tablePart">
-            {/* <h2>New Invitations</h2>
+          {/* <h2>New Invitations</h2>
             <h3 style={{fontWeight:"normal"}}>Click to edit the status of the project</h3>
             <br/> */}
-            {/* <button >aa</button> */}
+          {/* <button >aa</button> */}
           <table id="uploadTable">
             <tr>
               <th>No.</th>
@@ -47,7 +46,6 @@ function NewInvitations() {
               })}
           </table>
         </div>
-      
       </div>
     </div>
   );

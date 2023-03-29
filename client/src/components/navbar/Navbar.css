@@ -22,7 +22,9 @@
   cursor: pointer;
 }
 
+.userButton,
 .navButton {
+  width: 200px;
   background-color: #6f38c5;
   color: white;
   border: none;
@@ -30,4 +32,30 @@
   cursor: pointer;
   font-weight: 400;
   font-size: 20px;
+}
+
+.userButton {
+  position: relative;
+}
+
+.dropDown {
+  position: absolute;
+  top: 72px;
+  left: 1855px;
+  font-size: 20px;
+  color: #6f38c5;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.dropDownItem {
+  width: 216px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 2px solid #6f38c5;
+  cursor: pointer;
 }

@@ -7,7 +7,7 @@ import { storage } from "../../utils/firebase.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
-const NeewInvitationsModal = (props) => {
+const NewInvitationsModal = (props) => {
   const classes = useStyles();
   const { isUploadModalOpen, setIsUploadModalOpen } = props;
 

@@ -1,13 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
-.projects {
-  display: flex;
-  justify-content: center;
-}
-
 .projectsContainer {
   width: 100%;
   max-width: 2400px;
@@ -19,16 +9,6 @@ body {
   padding-bottom: 100px;
 }
 
-.projectsList {
-  display: flex;
-  flex-direction: column;
-}
-
-.projectItem {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 50px 150px;
-  border: 1px solid #6f38c5;
-  gap: 30px;
+table {
+  width: 1200px;
 }

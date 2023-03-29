@@ -12,13 +12,14 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
     isEditor: {
       type: Boolean,
       default: false,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

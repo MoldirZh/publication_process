@@ -4,6 +4,7 @@ import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
+  console.log(req);
   try {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
@@ -11,8 +12,10 @@ export const register = async (req, res, next) => {
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
+      isEditor: req.body.isEditor,
       password: hash,
     });
+
     await newUser.save();
     res.status(200).send("User has been created");
   } catch (err) {
@@ -44,7 +47,7 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ ...otherDetails });
+      .json({ details: { ...otherDetails }, isEditor });
   } catch (err) {
     next(err);
   }
