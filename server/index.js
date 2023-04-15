@@ -8,6 +8,7 @@ import projectsRoute from "./routes/projects.js";
 import papersRoute from "./routes/papers.js";
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
+import invitationsRoute from "./routes/invitations.js";
 
 const app = express();
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/server/auth", authRoute);
 app.use("/server/users", usersRoute);
 app.use("/server/projects", projectsRoute);
 app.use("/server/papers", papersRoute);
+app.use("/server/invitations", invitationsRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import "./navbar.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import Profile from "../../pages/profile/Profile";
 
 const Navbar = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -45,6 +44,12 @@ const Navbar = () => {
                   onClick={() => navigate("/projects")}
                 >
                   My Projects
+                </div>
+                <div
+                  className="dropDownItem"
+                  onClick={() => navigate("/invitations")}
+                >
+                  My Invitations
                 </div>
                 <div className="dropDownItem" onClick={logout}>
                   Log out

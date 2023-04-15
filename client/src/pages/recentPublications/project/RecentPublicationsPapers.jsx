@@ -1,8 +1,7 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import Navbar from "../../../components/navbar/Navbar";
 import Footer from "../../../components/footer/Footer";
-import { Link } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch.js";
 import "./recentPublicationsPapers.css";
 
@@ -24,10 +23,11 @@ const RecentPublicationsPapers = () => {
             {data &&
               data.papers &&
               data.papers.map((elem) => {
+                console.log(elem);
                 return (
                   <div className="paperItem">
-                    <Link to={`/recentPublications/paper/${elem}`}>
-                      <h2 className="projectTitle">{elem}</h2>
+                    <Link to={`/recentPublications/paper/${elem._id}`}>
+                      <h2 className="paperTitle">{elem.name}</h2>
                     </Link>
                   </div>
                 );

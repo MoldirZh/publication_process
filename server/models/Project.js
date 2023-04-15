@@ -17,10 +17,27 @@ const projectSchema = new mongoose.Schema(
     },
     isPublic: {
       type: Boolean,
+      required: true,
     },
-    papers: {
-      type: [String],
-    },
+    editors: [
+      {
+        type: String,
+        ref: "User",
+        required: true,
+      },
+    ],
+    authors: [
+      {
+        type: String,
+        ref: "User",
+      },
+    ],
+    papers: [
+      {
+        type: String,
+        ref: "Paper",
+      },
+    ],
     invitations: {
       type: [String],
     },

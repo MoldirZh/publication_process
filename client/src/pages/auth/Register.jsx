@@ -11,7 +11,6 @@ function Register() {
   const [credentials, setCredentials] = useState({
     username: undefined,
     email: undefined,
-    isEditor: undefined,
     password: undefined,
   });
   const [errorMsg, setErrorMsg] = useState("");
@@ -22,12 +21,7 @@ function Register() {
 
   const handleChange = (e) => {
     setErrorMsg("");
-    e.target.type === "select-one"
-      ? setCredentials((prev) => ({
-          ...prev,
-          isEditor: e.target.value === "editor",
-        }))
-      : setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   const register = async (e) => {
@@ -67,13 +61,6 @@ function Register() {
             id="email"
             onChange={handleChange}
           />
-          <select required id="role" onChange={handleChange}>
-            <option value="" disabled selected hidden>
-              Role
-            </option>
-            <option value="editor">Editor</option>
-            <option value="author">Author</option>
-          </select>
           <input
             required
             type="password"

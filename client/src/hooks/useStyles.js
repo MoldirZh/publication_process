@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: "border-box",
     position: "absolute",
     width: "700px",
-    height: "550px",
+    height: "650px",
     left: "25%",
     right: "20%",
     top: "15%",
@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   buttons: {
     backgroundColor: "#6F38C5",
     color: "white",
-    height: "30px",
+    height: "60px",
     borderRadius: "15.08px",
   },
 }));

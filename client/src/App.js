@@ -6,8 +6,10 @@ import RecentPublications from "./pages/recentPublications/projects/RecentPublic
 import Upload from "./pages/upload/Upload";
 import Profile from "./pages/profile/Profile";
 import Projects from "./pages/projects/Projects";
+import Papers from "./pages/papers/Papers";
 import RecentPublicationsPapers from "./pages/recentPublications/project/RecentPublicationsPapers";
 import RecentPublicationsPaper from "./pages/recentPublications/paper/RecentPublicationsPaper";
+import MyInvitations from "./pages/myInvitations/MyInvitations";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="/upload" element={<Upload />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/projects" element={<Projects />}></Route>
+        <Route path="/projects/:id" element={<Papers />}></Route>
+        <Route path="/invitations" element={<MyInvitations />}></Route>
       </Routes>
     </BrowserRouter>
   );
