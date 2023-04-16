@@ -3,6 +3,10 @@ import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
+import service1 from "../../images/service1.png";
+import service2 from "../../images/service2.png";
+import service3 from "../../images/service3.png";
+import homeImg2 from "../../images/homeImg2.png";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -12,10 +16,7 @@ const Home = () => {
       <div className="home">
         <div className="homeContainer">
           <div className="homeImgContainer">
-            <img
-              src={require("../../images/homeImg2.png")}
-              className="homeImg"
-            />
+            <img src={homeImg2} className="homeImg" />
           </div>
           <button onClick={() => navigate("/recentPublications")}>
             SHOW RECENT PUBLISHED WORKS
@@ -26,27 +27,15 @@ const Home = () => {
             </div>
             <div className="servicesList">
               <div className="serviceItem">
-                <img
-                  src={require("../../images/service1.png")}
-                  alt=""
-                  className="serviceImg"
-                />
+                <img src={service1} alt="" className="serviceImg" />
                 <span className="serviceName">Author-editor communication</span>
               </div>
               <div className="serviceItem">
-                <img
-                  src={require("../../images/service2.png")}
-                  alt=""
-                  className="serviceImg"
-                />
+                <img src={service2} alt="" className="serviceImg" />
                 <span className="serviceName">Easy upload for the authors</span>
               </div>
               <div className="serviceItem">
-                <img
-                  src={require("../../images/service3.png")}
-                  alt=""
-                  className="serviceImg"
-                />
+                <img src={service3} alt="" className="serviceImg" />
                 <span className="serviceName">
                   Checking works online for editors
                 </span>

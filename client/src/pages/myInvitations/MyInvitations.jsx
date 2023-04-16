@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
-import "./myInvitations.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import useFetch from "../../hooks/useFetch.js";
 import { AuthContext } from "../../context/AuthContext";
-import ViewInvitationModal from "./ViewInvitationModal";
+import ViewInvitationPopup from "./ViewInvitationModal";
 
 const MyInvitations = () => {
   const { user } = useContext(AuthContext);
@@ -13,18 +12,18 @@ const MyInvitations = () => {
     `/server/invitations/getUserInvitations?userid=${user._id}`
   );
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [invitationItem, setInvitationItem] = useState(undefined);
 
   return (
     <div>
       <Navbar />
-      <div className="invitations">
-        <div className="invitationsContainer">
-          <h1 className="invitationsHeader">My invitations</h1>
-          <ViewInvitationModal
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
+      <div className="page">
+        <div className="container">
+          <h2 className="header">My invitations</h2>
+          <ViewInvitationPopup
+            isPopupVisible={isPopupVisible}
+            setIsPopupVisible={setIsPopupVisible}
             item={invitationItem}
           />
           <table id="invitationsTable">
@@ -46,7 +45,7 @@ const MyInvitations = () => {
                     <td
                       onClick={() => {
                         setInvitationItem(item);
-                        setIsModalOpen(true);
+                        setIsPopupVisible(true);
                       }}
                     >
                       {item.status}

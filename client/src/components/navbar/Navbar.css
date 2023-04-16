@@ -1,12 +1,12 @@
 .navbar {
-  height: 7vh;
+  height: 60px;
   display: flex;
   justify-content: center;
 }
 
 .navContainer {
   width: 100%;
-  max-width: 1920px;
+  max-width: 1224px;
   color: white;
   display: flex;
   align-items: center;
@@ -16,22 +16,19 @@
 .logo {
   background-color: #6f38c5;
   border-radius: 50%;
-  padding: 20px;
-  font-weight: 400;
-  font-size: 24px;
-  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  color: white;
+  font-size: 12px;
 }
 
 .userButton,
 .navButton {
-  width: 200px;
+  width: 150px;
+  height: 50px;
   background-color: #6f38c5;
   color: white;
-  border: none;
-  padding: 15px 20px;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .userButton {
@@ -40,22 +37,21 @@
 
 .dropDown {
   position: absolute;
-  top: 72px;
-  left: 1855px;
-  font-size: 20px;
+  top: 50px;
+  width: 150px;
+  font-size: 14px;
   color: #6f38c5;
   background-color: white;
-  border-radius: 5px;
   -webkit-box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
 
 .dropDownItem {
-  width: 216px;
-  display: flex;
-  justify-content: space-between;
+  box-sizing: border-box;
+  width: 150px;
+  text-align: left;
   padding: 10px;
-  border: 2px solid #6f38c5;
+  border: 1px solid #6f38c5;
   cursor: pointer;
 }

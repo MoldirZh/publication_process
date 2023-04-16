@@ -44,39 +44,41 @@ function Register() {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <div className="leftWrapper">
-          <h1>REGISTRATION</h1>
-          <input
-            required
-            type="text"
-            placeholder="username"
-            id="username"
-            onChange={handleChange}
-          />
-          <input
-            required
-            type="text"
-            placeholder="email"
-            id="email"
-            onChange={handleChange}
-          />
-          <input
-            required
-            type="password"
-            placeholder="password"
-            id="password"
-            onChange={handleChange}
-          />
-          {errorMsg !== "" && <div className="errorMsg">{errorMsg}</div>}
-          <button disabled={loading} onClick={register}>
-            Register
-          </button>
-          <div className="divider">OR</div>
-          <button onClick={() => navigate("/login")}>Login</button>
-        </div>
-        <div className="rightWrapper">
-          <img src={loginRegisterImg} alt="Register"></img>
+      <div className="loginRegister">
+        <div className="loginRegisterContainer">
+          <div className="leftWrapper">
+            <h1>REGISTRATION</h1>
+            <input
+              required
+              type="text"
+              placeholder="username"
+              id="username"
+              onChange={handleChange}
+            />
+            <input
+              required
+              type="text"
+              placeholder="email"
+              id="email"
+              onChange={handleChange}
+            />
+            <input
+              required
+              type="password"
+              placeholder="password"
+              id="password"
+              onChange={handleChange}
+            />
+            {errorMsg !== "" && <div className="errorMsg">{errorMsg}</div>}
+            <button disabled={loading} onClick={register}>
+              Register
+            </button>
+            <div className="divider">OR</div>
+            <button onClick={() => navigate("/login")}>Login</button>
+          </div>
+          <div className="rightWrapper">
+            <img src={loginRegisterImg} alt="Register"></img>
+          </div>
         </div>
       </div>
       <Footer />

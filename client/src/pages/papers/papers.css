@@ -1,16 +1,7 @@
-.papersContainer {
+.buttonsContainer {
   width: 100%;
-  max-width: 2400px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  position: relative;
-  padding-bottom: 100px;
-}
-
-table {
-  width: 1200px;
+  justify-content: space-evenly;
 }
 
 .createProjectBtn {
@@ -20,6 +11,5 @@ table {
   padding: 15px 20px;
   cursor: pointer;
   width: 200px;
-  font-weight: 400;
   font-size: 20px;
 }

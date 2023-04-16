@@ -38,30 +38,32 @@ function Login() {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <div className="leftWrapper">
-          <h1>LOGIN</h1>
-          <input
-            type="text"
-            placeholder="Email"
-            id="email"
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            id="password"
-            onChange={handleChange}
-          />
-          {errorMsg !== "" && <div className="errorMsg">{errorMsg}</div>}
-          <button disabled={loading} onClick={handleClick}>
-            Login
-          </button>
-          <div className="divider">OR</div>
-          <button onClick={() => navigate("/register")}>Sign up</button>
-        </div>
-        <div className="rightWrapper">
-          <img src={loginRegister} alt="Login"></img>
+      <div className="loginRegister">
+        <div className="loginRegisterContainer">
+          <div className="leftWrapper">
+            <h1>LOGIN</h1>
+            <input
+              type="text"
+              placeholder="Email"
+              id="email"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              onChange={handleChange}
+            />
+            {errorMsg !== "" && <div className="errorMsg">{errorMsg}</div>}
+            <button disabled={loading} onClick={handleClick}>
+              Login
+            </button>
+            <div className="divider">OR</div>
+            <button onClick={() => navigate("/register")}>Sign up</button>
+          </div>
+          <div className="rightWrapper">
+            <img src={loginRegister} alt="Login"></img>
+          </div>
         </div>
       </div>
       <Footer />

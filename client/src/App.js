@@ -1,10 +1,10 @@
+import 'devextreme/dist/css/dx.light.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import RecentPublications from "./pages/recentPublications/projects/RecentPublications";
 import Upload from "./pages/upload/Upload";
-import Profile from "./pages/profile/Profile";
 import Projects from "./pages/projects/Projects";
 import Papers from "./pages/papers/Papers";
 import RecentPublicationsPapers from "./pages/recentPublications/project/RecentPublicationsPapers";
@@ -31,7 +31,6 @@ function App() {
           element={<RecentPublicationsPaper />}
         ></Route>
         <Route path="/upload" element={<Upload />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
         <Route path="/projects" element={<Projects />}></Route>
         <Route path="/projects/:id" element={<Papers />}></Route>
         <Route path="/invitations" element={<MyInvitations />}></Route>

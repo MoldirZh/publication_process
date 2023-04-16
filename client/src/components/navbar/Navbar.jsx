@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import "../../App.css";
 import "./navbar.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -20,42 +21,37 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navContainer">
-        <span className="logo" onClick={() => navigate("/")}>
+        <button className="logo" onClick={() => navigate("/")}>
           Logo
-        </span>
+        </button>
         {user ? (
           <>
-            <div
+            <button
               className="userButton"
               onClick={() => setOpenDropDown(!openDropDown)}
             >
               {user.username}
-            </div>
-            {openDropDown && (
-              <div className="dropDown">
-                <div
-                  className="dropDownItem"
-                  onClick={() => navigate("/profile")}
-                >
-                  My Profile
+
+              {openDropDown && (
+                <div className="dropDown">
+                  <div
+                    className="dropDownItem"
+                    onClick={() => navigate("/projects")}
+                  >
+                    My Projects
+                  </div>
+                  <div
+                    className="dropDownItem"
+                    onClick={() => navigate("/invitations")}
+                  >
+                    My Invitations
+                  </div>
+                  <div className="dropDownItem" onClick={logout}>
+                    Log out
+                  </div>
                 </div>
-                <div
-                  className="dropDownItem"
-                  onClick={() => navigate("/projects")}
-                >
-                  My Projects
-                </div>
-                <div
-                  className="dropDownItem"
-                  onClick={() => navigate("/invitations")}
-                >
-                  My Invitations
-                </div>
-                <div className="dropDownItem" onClick={logout}>
-                  Log out
-                </div>
-              </div>
-            )}
+              )}
+            </button>
           </>
         ) : (
           <button className="navButton" onClick={() => navigate("/login")}>

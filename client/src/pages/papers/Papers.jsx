@@ -12,8 +12,8 @@ const Papers = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isInvitePopupVisible, setIsInvitePopupVisible] = useState(false);
+  const [isUploadPopupVisible, setIsUploadPopupVisible] = useState(false);
 
   const { data, loading, error } = useFetch(`/server/projects/find/${id}`);
 
@@ -24,53 +24,59 @@ const Papers = () => {
   return (
     <div>
       <Navbar />
-      <div className="papers">
-        <div className="papersContainer">
-          <h1 className="papersHeader">Papers</h1>
-          <button
-            className="createProjectBtn"
-            onClick={() => setIsInviteModalOpen(true)}
-          >
-            Invite user
-          </button>
+      <div className="page">
+        <div className="container">
+          <h2 className="header">Papers</h2>
+          <div className="buttonsContainer">
+            <button
+              className="createProjectBtn"
+              onClick={() => setIsInvitePopupVisible(true)}
+            >
+              Invite user
+            </button>
+            <button
+              className="createProjectBtn"
+              onClick={() => setIsUploadPopupVisible(true)}
+            >
+              Upload paper
+            </button>
+          </div>
           <InviteUser
-            modalIsOpen={isInviteModalOpen}
-            setModalIsOpen={setIsInviteModalOpen}
+            modalIsOpen={isInvitePopupVisible}
+            setModalIsOpen={setIsInvitePopupVisible}
             projectId={id}
           />
-          <button
-            className="createProjectBtn"
-            onClick={() => setIsUploadModalOpen(true)}
-          >
-            Upload paper
-          </button>
           <UploadPaperModal
-            modalIsOpen={isUploadModalOpen}
-            setIsModalOpen={setIsUploadModalOpen}
+            modalIsOpen={isUploadPopupVisible}
+            setIsModalOpen={setIsUploadPopupVisible}
             projectId={id}
           />
-          <table id="papersTable">
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Authors</th>
-              <th>Progress</th>
-              <th>Open file</th>
-            </tr>
-            {data.papers &&
-              data.papers.map((elem) => {
-                return (
-                  <tr key={elem._id}>
-                    <td>{elem.name}</td>
-                    <td>{elem.desc}</td>
-                    <td>{elem.authors}</td>
-                    <td>{elem.status}</td>
-                    <td>
-                      <button onClick={() => openPdf(elem)}>Open</button>
-                    </td>
-                  </tr>
-                );
-              })}
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Authors</th>
+                <th>Progress</th>
+                <th>Open file</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.papers &&
+                data.papers.map((elem) => {
+                  return (
+                    <tr key={elem._id}>
+                      <td>{elem.name}</td>
+                      <td>{elem.desc}</td>
+                      <td>{elem.authors}</td>
+                      <td>{elem.status}</td>
+                      <td>
+                        <button onClick={() => openPdf(elem)}>Open</button>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
           </table>
         </div>
       </div>
