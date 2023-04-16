@@ -83,7 +83,9 @@ export const getRecentPublications = async (req, res, next) => {
   try {
     const recentPublications = await Project.find({
       $and: [{ isPublic: true }, { progress: "Completed" }],
-    }).populate("papers");
+    })
+      .populate("papers")
+      .populate("editors");
 
     await Project.find(req.params.id);
     res.status(200).json(recentPublications);

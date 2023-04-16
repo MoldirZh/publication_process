@@ -7,34 +7,30 @@ const ModalWindow = (props) => {
   const { isPopupVisible, setIsPopupVisible } = props;
   const { user } = useContext(AuthContext);
 
-  const [newProjectData, setNewProjectData] = useState({
-    name: undefined,
-    desc: undefined,
-    isPublic: undefined,
-    editors: [user?._id] || undefined,
+  const [invitationData, setinvitationData] = useState({
+    from: user?._id,
+    to: undefined,
+    message: undefined,
+    role: undefined,
   });
 
-  const handleChange = (e) => {
-    e.target.type === "select-one"
-      ? setNewProjectData((prev) => ({
-          ...prev,
-          isPublic: e.target.value === "public",
-        }))
-      : setNewProjectData((prev) => ({
-          ...prev,
-          [e.target.id]: e.target.value,
-        }));
+  const handleChange = async (e) => {
+    setinvitationData((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `/server/projects?userid=${user._id}`,
-        newProjectData
+        `/server/invitations/${props.projectId}`,
+        invitationData
       );
-      setIsPopupVisible(false);
       console.log(res);
+      setIsPopupVisible(false);
+      window.location.reload();
     } catch (err) {
       throw err;
     }
@@ -48,41 +44,41 @@ const ModalWindow = (props) => {
     return (
       <form onSubmit={handleSubmit} className="modalContainer">
         <div className="modalItem">
-          <label htmlFor="name">Name of the project: </label>
+          <label htmlFor="to">Name of the invitee: </label>
           <input
             required
             type="text"
-            id="name"
-            className="modalInput"
-            name="name"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="modalItem">
-          <label htmlFor="desc">Description of the project: </label>
-          <input
-            required
-            type="text"
-            id="desc"
-            name="desc"
+            id="to"
+            name="to"
             className="modalInput"
             onChange={handleChange}
           />
         </div>
         <div className="modalItem">
-          <label htmlFor="type">Type of the project: </label>
+          <label htmlFor="desc">Message to the invitee: </label>
+          <input
+            required
+            type="text"
+            id="message"
+            name="message"
+            className="modalInput"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="modalItem">
+          <label htmlFor="role">Role of the invitee: </label>
           <select
             required
-            id="isPublic"
-            name="type"
+            id="role"
+            name="role"
             onChange={handleChange}
             className="modalSelect"
           >
-            <option value="public">Public</option>
-            <option value="private">Private</option>
+            <option value="editors">Editor</option>
+            <option value="authors">Author</option>
           </select>
         </div>
-        <input type="submit" value="Create Project" className="modalButton" />
+        <input type="submit" value="Invite User" className="modalButton" />
       </form>
     );
   };
@@ -93,7 +89,7 @@ const ModalWindow = (props) => {
       width={500}
       height="auto"
       showTitle={true}
-      title="Write details about the project:"
+      title="Write details about the invitation:"
       visible={isPopupVisible}
       onHiding={togglePopup}
       hideOnOutsideClick={true}

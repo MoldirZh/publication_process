@@ -18,7 +18,10 @@ const Home = () => {
           <div className="homeImgContainer">
             <img src={homeImg2} className="homeImg" />
           </div>
-          <button onClick={() => navigate("/recentPublications")}>
+          <button
+            className="showPublicationsBtn"
+            onClick={() => navigate("/recentPublications")}
+          >
             SHOW RECENT PUBLISHED WORKS
           </button>
           <div className="servicesWrapper">

@@ -3,6 +3,7 @@ import "../../App.css";
 import "./navbar.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import logo from "../../images/logo.png";
 
 const Navbar = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -21,9 +22,12 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navContainer">
-        <button className="logo" onClick={() => navigate("/")}>
-          Logo
-        </button>
+        <img
+          src={logo}
+          alt="logo"
+          className="logo"
+          onClick={() => navigate("/")}
+        />
         {user ? (
           <>
             <button

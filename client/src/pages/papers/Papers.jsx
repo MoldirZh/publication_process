@@ -5,8 +5,8 @@ import Footer from "../../components/footer/Footer";
 import useFetch from "../../hooks/useFetch.js";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useLocation } from "react-router-dom";
-import InviteUser from "./InviteUser";
-import UploadPaperModal from "./UploadPaperModal";
+import InviteUser from "./InviteUserPopup";
+import UploadPaperModal from "./UploadPaperPopup";
 
 const Papers = () => {
   const location = useLocation();
@@ -29,26 +29,26 @@ const Papers = () => {
           <h2 className="header">Papers</h2>
           <div className="buttonsContainer">
             <button
-              className="createProjectBtn"
+              className="inviteUserBtn"
               onClick={() => setIsInvitePopupVisible(true)}
             >
               Invite user
             </button>
             <button
-              className="createProjectBtn"
+              className="uploadPaperBtn"
               onClick={() => setIsUploadPopupVisible(true)}
             >
               Upload paper
             </button>
           </div>
           <InviteUser
-            modalIsOpen={isInvitePopupVisible}
-            setModalIsOpen={setIsInvitePopupVisible}
+            isPopupVisible={isInvitePopupVisible}
+            setIsPopupVisible={setIsInvitePopupVisible}
             projectId={id}
           />
           <UploadPaperModal
-            modalIsOpen={isUploadPopupVisible}
-            setIsModalOpen={setIsUploadPopupVisible}
+            isPopupVisible={isUploadPopupVisible}
+            setIsPopupVisible={setIsUploadPopupVisible}
             projectId={id}
           />
           <table>

@@ -1,17 +1,6 @@
 import Paper from "../models/Paper.js";
 import Project from "../models/Project.js";
 
-export const uploadPaper = async (req, res, next) => {
-  const newPaper = new Paper(req.body);
-
-  try {
-    const savedPaper = await newPaper.save();
-    res.status(200).json(savedPaper);
-  } catch (err) {
-    next(err);
-  }
-};
-
 export const createPaper = async (req, res, next) => {
   const projectid = req.params.projectid;
   const newPaper = new Paper(req.body);
@@ -59,7 +48,7 @@ export const deletePaper = async (req, res, next) => {
 
 export const getPaper = async (req, res, next) => {
   try {
-    const paper = await Paper.findById(req.params.id);
+    const paper = await Paper.findById(req.params.id).populate("authors");
     await Paper.findById(req.params.id);
     res.status(200).json(paper);
   } catch (err) {

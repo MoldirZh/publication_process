@@ -24,7 +24,7 @@
   height: 40vh;
 }
 
-.homeContainer > button {
+.showPublicationsBtn {
   background-color: white;
   color: #6f38c5;
   border: 2px solid #6f38c5;
