@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Popup } from "devextreme-react/popup";
 
@@ -15,7 +15,11 @@ const ModalWindow = (props) => {
     authors: undefined,
   });
 
-  const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState({
+    pdfFile: null,
+    sourceFile: null,
+    copyrightFile: null,
+  });
 
   const handleChange = async (e) => {
     setUploadData((prev) => ({
@@ -25,35 +29,75 @@ const ModalWindow = (props) => {
   };
 
   const handleFileChange = async (e) => {
-    setUploadedFile(e.target.files[0]);
+    setUploadedFiles((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.files[0],
+    }));
+  };
+
+  let locArr = [
+    {
+      file: uploadedFiles.pdfFile,
+      route: "papers",
+    },
+    {
+      file: uploadedFiles.sourceFile,
+      route: "sources",
+    },
+    {
+      file: uploadedFiles.copyrightFile,
+      route: "copyrights",
+    },
+  ];
+
+  const uploadFile = function (file, route) {
+    return new Promise(function (resolve, reject) {
+      if (file == null) return;
+
+      const fileRef = ref(storage, `${route}/${file + v4()}`);
+      uploadBytes(fileRef, file)
+        .then(() => {
+          getDownloadURL(fileRef)
+            .then((url) => {
+              resolve(url);
+            })
+            .catch((error) => {
+              console.log("error", error);
+            });
+        })
+        .catch((error) => {
+          console.log("err", error);
+        });
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (uploadedFile == null) return;
-
-    const fileRef = ref(storage, `papers/${uploadedFile + v4()}`);
-
-    uploadBytes(fileRef, uploadedFile)
-      .then(() => {
-        getDownloadURL(fileRef).then((url) => {
-          const pdfUrl = { pdfFile: url };
-          let newData = { ...uploadData, ...pdfUrl };
-          axios
-            .post(`/server/papers/${projectId}`, newData)
-            .then((res) => {
-              console.log("res", res);
-              setIsPopupVisible(false);
-              window.location.reload();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
+    Promise.all(locArr.map((elem) => uploadFile(elem.file, elem.route)))
+      .then((values) => {
+        const [pdfUrl, sourceUrl, copyrightUrl] = values;
+        const pdfUrlObj = { pdfFile: pdfUrl };
+        const sourceUrlObj = { sourceFile: sourceUrl };
+        const copyrightUrlObj = { copyrightFile: copyrightUrl };
+        let newData = {
+          ...uploadData,
+          ...pdfUrlObj,
+          ...sourceUrlObj,
+          ...copyrightUrlObj,
+        };
+        axios
+          .post(`/server/papers/${projectId}`, newData)
+          .then((res) => {
+            console.log("res", res);
+            setIsPopupVisible(false);
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((error) => {
-        console.log("err", error);
+        console.error(error.message);
       });
   };
 
@@ -105,7 +149,31 @@ const ModalWindow = (props) => {
             id="pdfFile"
             name="pdfFile"
             className="modalInput"
-            accept="application/pdf" //, .doc, .docx, .zip"
+            accept="application/pdf"
+            onChange={handleFileChange}
+          />
+        </div>
+        <div className="modalItem">
+          <label htmlFor="sourceFile">Source file: </label>
+          <input
+            required
+            type="file"
+            id="sourceFile"
+            name="sourceFile"
+            className="modalInput"
+            accept=".zip, .tex"
+            onChange={handleFileChange}
+          />
+        </div>
+        <div className="modalItem">
+          <label htmlFor="sourceFile">Copyright: </label>
+          <input
+            required
+            type="file"
+            id="copyrightFile"
+            name="copyrightFile"
+            className="modalInput"
+            accept="application/pdf"
             onChange={handleFileChange}
           />
         </div>

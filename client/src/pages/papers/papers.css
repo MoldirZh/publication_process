@@ -3,7 +3,8 @@
 }
 
 .inviteUserBtn,
-.uploadPaperBtn {
+.uploadPaperBtn,
+.completeProjectBtn {
   background-color: #6f38c5;
   color: white;
   border: none;
@@ -15,7 +16,8 @@
 .inviteUserBtn {
   float: left;
 }
-.uploadPaperBtn {
+.uploadPaperBtn,
+.completeProjectBtn {
   float: right;
 }
 
@@ -25,6 +27,18 @@
   color: white;
   border-radius: 25%;
   padding: 3px 6px;
+}
+
+.Submitted.false,
+.Approved.false,
+.Rejected.false {
+  cursor: default;
+}
+
+.Submitted.true,
+.Approved.true,
+.Rejected.true {
+  cursor: pointer;
 }
 
 .Submitted {

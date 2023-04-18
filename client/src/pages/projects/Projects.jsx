@@ -46,7 +46,6 @@ const Projects = () => {
               {data &&
                 data.map(function (item, index) {
                   // In progress/Completed
-                  console.log(item.progress);
                   return (
                     <tr key={index}>
                       <td>{index + 1}</td>

@@ -14,7 +14,6 @@ export const updateProject = async (req, res, next) => {
   try {
     let updatedProject;
     if (req.query.isPush) {
-      console.log(req.body);
       updatedProject = await Project.findByIdAndUpdate(req.params.id, {
         $push: req.body,
       });
