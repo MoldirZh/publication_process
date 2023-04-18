@@ -1,0 +1,19 @@
+.Awaiting,
+.Accepted,
+.Declined {
+  color: white;
+  border-radius: 25%;
+  padding: 3px 6px;
+}
+
+.Awaiting {
+  background-color: #0166ff;
+}
+
+.Accepted {
+  background-color: #39c557;
+}
+
+.Declined {
+  background-color: #c53938;
+}

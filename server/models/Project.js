@@ -13,7 +13,7 @@ const projectSchema = new mongoose.Schema(
     progress: {
       type: String,
       required: true,
-      default: "Awaiting", //In progress, Completed
+      default: "In progress", //In progress, Completed
     },
     isPublic: {
       type: Boolean,

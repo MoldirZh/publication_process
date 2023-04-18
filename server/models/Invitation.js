@@ -28,7 +28,7 @@ const invitationSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      default: "Awaiting", //Accepted, Rejected
+      default: "Awaiting", //Accepted, Declined
     },
   },
   { timestamps: true }

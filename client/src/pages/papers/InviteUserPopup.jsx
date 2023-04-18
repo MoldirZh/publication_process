@@ -11,7 +11,7 @@ const ModalWindow = (props) => {
     from: user?._id,
     to: undefined,
     message: undefined,
-    role: undefined,
+    role: "editors",
   });
 
   const handleChange = async (e) => {

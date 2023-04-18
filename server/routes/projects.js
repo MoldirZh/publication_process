@@ -8,7 +8,6 @@ import {
   getRecentPublications,
   getUserProjects,
 } from "../controllers/project.js";
-import { verifyEditor } from "../utils/verifyToken.js";
 
 const router = express.Router();
 

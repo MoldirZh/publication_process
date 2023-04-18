@@ -45,6 +45,8 @@ const Projects = () => {
             <tbody>
               {data &&
                 data.map(function (item, index) {
+                  // In progress/Completed
+                  console.log(item.progress);
                   return (
                     <tr key={index}>
                       <td>{index + 1}</td>
@@ -52,7 +54,17 @@ const Projects = () => {
                         <Link to={`/projects/${item._id}`}>{item.name}</Link>
                       </td>
                       <td>{item.editors[0].username}</td>
-                      <td>{item.progress}</td>
+                      <td>
+                        <span
+                          className={
+                            item.progress === "In progress"
+                              ? "inProgress"
+                              : "completed"
+                          }
+                        >
+                          {item.progress}
+                        </span>
+                      </td>
                     </tr>
                   );
                 })}

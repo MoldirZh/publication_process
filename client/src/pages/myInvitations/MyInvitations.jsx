@@ -4,6 +4,7 @@ import Footer from "../../components/footer/Footer";
 import useFetch from "../../hooks/useFetch.js";
 import { AuthContext } from "../../context/AuthContext";
 import ViewInvitationPopup from "./ViewInvitationModal";
+import "./myInvitations.css";
 
 const MyInvitations = () => {
   const { user } = useContext(AuthContext);
@@ -27,32 +28,36 @@ const MyInvitations = () => {
             item={invitationItem}
           />
           <table id="invitationsTable">
-            <tr>
-              <th>Invitation #</th>
-              <th>From</th>
-              <th>Message</th>
-              <th>Project</th>
-              <th>Status</th>
-            </tr>
-            {data &&
-              data.map(function (item, index) {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.from.username}</td>
-                    <td>{item.message}</td>
-                    <td>{item.project.name}</td>
-                    <td
-                      onClick={() => {
-                        setInvitationItem(item);
-                        setIsPopupVisible(true);
-                      }}
-                    >
-                      {item.status}
-                    </td>
-                  </tr>
-                );
-              })}
+            <thead>
+              <tr>
+                <th>Invitation #</th>
+                <th>From</th>
+                <th>Message</th>
+                <th>Project</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data &&
+                data.map(function (item, index) {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.from.username}</td>
+                      <td>{item.message}</td>
+                      <td>{item.project.name}</td>
+                      <td
+                        onClick={() => {
+                          setInvitationItem(item);
+                          setIsPopupVisible(true);
+                        }}
+                      >
+                        <span className={item.status}>{item.status}</span>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
           </table>
         </div>
       </div>

@@ -1,18 +1,9 @@
 import Project from "../models/Project.js";
-import { ObjectId } from "mongodb";
 
 export const createProject = async (req, res, next) => {
-  // const userid = req.query.userid;
   const newProject = new Project(req.body);
   try {
     const savedProject = await newProject.save();
-    // try {
-    //   await User.findByIdAndUpdate(userid, {
-    //     $push: { projects: savedProject._id },
-    //   });
-    // } catch (err) {
-    //   next(err);
-    // }
     res.status(200).json(savedProject);
   } catch (err) {
     next(err);
@@ -20,8 +11,6 @@ export const createProject = async (req, res, next) => {
 };
 
 export const updateProject = async (req, res, next) => {
-  console.log(req);
-
   try {
     let updatedProject;
     if (req.query.isPush) {

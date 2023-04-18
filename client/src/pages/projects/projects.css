@@ -8,3 +8,18 @@
   right: 0px;
   margin: 0 10% 0 auto;
 }
+
+.inProgress,
+.completed {
+  color: white;
+  border-radius: 25%;
+  padding: 3px 6px;
+}
+
+.inProgress {
+  background-color: #0166ff;
+}
+
+.completed {
+  background-color: #39c557;
+}

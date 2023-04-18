@@ -1,7 +1,5 @@
 .buttonsContainer {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
+  width: 80%;
 }
 
 .inviteUserBtn,
@@ -12,4 +10,31 @@
   padding: 10px;
   cursor: pointer;
   width: 150px;
+}
+
+.inviteUserBtn {
+  float: left;
+}
+.uploadPaperBtn {
+  float: right;
+}
+
+.Submitted,
+.Approved,
+.Rejected {
+  color: white;
+  border-radius: 25%;
+  padding: 3px 6px;
+}
+
+.Submitted {
+  background-color: #0166ff;
+}
+
+.Approved {
+  background-color: #39c557;
+}
+
+.Rejected {
+  background-color: #c53938;
 }

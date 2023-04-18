@@ -10,7 +10,7 @@ const ModalWindow = (props) => {
   const [newProjectData, setNewProjectData] = useState({
     name: undefined,
     desc: undefined,
-    isPublic: undefined,
+    isPublic: true,
     editors: [user?._id] || undefined,
   });
 
@@ -24,6 +24,7 @@ const ModalWindow = (props) => {
           ...prev,
           [e.target.id]: e.target.value,
         }));
+    console.log(newProjectData);
   };
 
   const handleSubmit = async (e) => {
@@ -34,6 +35,7 @@ const ModalWindow = (props) => {
         newProjectData
       );
       setIsPopupVisible(false);
+      window.location.reload();
       console.log(res);
     } catch (err) {
       throw err;

@@ -57,7 +57,7 @@ const ModalWindow = (props) => {
   };
 
   const handleClick = async (e) => {
-    const status = e.target.value == "accept" ? "Accepted" : "Rejected";
+    const status = e.target.value == "accept" ? "Accepted" : "Declined";
     try {
       const res = await axios.put(`/server/invitations/${item._id}`, {
         status: status,

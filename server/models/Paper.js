@@ -13,7 +13,7 @@ const paperSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      default: "Awaiting", //Approved, Returned for revision
+      default: "Submitted", //Approved, Rejected
     },
     authors: {
       type: [String],

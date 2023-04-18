@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./papers.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
@@ -9,6 +9,8 @@ import InviteUser from "./InviteUserPopup";
 import UploadPaperModal from "./UploadPaperPopup";
 
 const Papers = () => {
+  const { user } = useContext(AuthContext);
+
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
@@ -16,6 +18,9 @@ const Papers = () => {
   const [isUploadPopupVisible, setIsUploadPopupVisible] = useState(false);
 
   const { data, loading, error } = useFetch(`/server/projects/find/${id}`);
+
+  const isEditor =
+    data.editors && data.editors.some((editor) => editor._id === user._id);
 
   const openPdf = (data) => {
     window.open(data.pdfFile, "_blank");
@@ -28,12 +33,14 @@ const Papers = () => {
         <div className="container">
           <h2 className="header">Papers</h2>
           <div className="buttonsContainer">
-            <button
-              className="inviteUserBtn"
-              onClick={() => setIsInvitePopupVisible(true)}
-            >
-              Invite user
-            </button>
+            {data && isEditor && (
+              <button
+                className="inviteUserBtn"
+                onClick={() => setIsInvitePopupVisible(true)}
+              >
+                Invite user
+              </button>
+            )}
             <button
               className="uploadPaperBtn"
               onClick={() => setIsUploadPopupVisible(true)}
@@ -69,7 +76,9 @@ const Papers = () => {
                       <td>{elem.name}</td>
                       <td>{elem.desc}</td>
                       <td>{elem.authors}</td>
-                      <td>{elem.status}</td>
+                      <td>
+                        <span className={elem.status}>{elem.status}</span>
+                      </td>
                       <td>
                         <button onClick={() => openPdf(elem)}>Open</button>
                       </td>
