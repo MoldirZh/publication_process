@@ -29,7 +29,7 @@ const Papers = () => {
 
   const onStatusClick = async (elem) => {
     if (isEditor) {
-      elem.status == "Submitted" || elem.status == "Rejected"
+      elem.status === "Submitted" || elem.status === "Rejected"
         ? await axios.put(`/server/papers/${elem._id}`, {
             status: "Approved",
           })
@@ -52,6 +52,51 @@ const Papers = () => {
       <div className="page">
         <div className="container">
           <h2 className="header">Papers</h2>
+          <div className="userManual">
+            <p>You have opened a project.</p>
+            <br />
+            {isEditor && (
+              <>
+                <p>
+                  You can invite users by clicking on the “Invite Users” button.
+                </p>
+                <br />
+              </>
+            )}
+            <p>Please upload a paper using the "Upload paper" button.</p>
+            <br />
+            {isEditor && (
+              <>
+                <p>
+                  Once all the papers are submitted and approved, you can
+                  complete the project using the "Complete project" button
+                </p>
+                <br />
+              </>
+            )}
+            The papers have the following statuses:
+            <ul>
+              <li>
+                <b>Submitted</b> - the paper was uploaded, but not yet checked
+                by the editors.
+              </li>
+              <li>
+                <b>Approved</b> - the paper was approved by the editors.
+              </li>
+              <li>
+                <b>Rejected</b> - the paper was rejected by the editors. The
+                paper needs to be revised and uploaded again.
+              </li>
+            </ul>
+            {isEditor && (
+              <>
+                <br />
+                You can approve or reject a paper by clicking on the status of
+                the paper.
+              </>
+            )}
+          </div>
+
           <div className="buttonsContainer">
             {data && isEditor && (
               <button
@@ -88,31 +133,23 @@ const Papers = () => {
           <table>
             <thead>
               <tr>
+                <th>#</th>
                 <th>Name</th>
-                <th>Description</th>
                 <th>Authors</th>
-                <th>Progress</th>
                 <th>Open PDF</th>
                 <th>Download source file</th>
                 <th>Open copyright</th>
+                <th>Progress</th>
               </tr>
             </thead>
             <tbody>
               {data.papers &&
-                data.papers.map((elem) => {
+                data.papers.map((elem, index) => {
                   return (
-                    <tr key={elem._id}>
+                    <tr key={index}>
+                      <td>{index + 1}</td>
                       <td>{elem.name}</td>
-                      <td>{elem.desc}</td>
                       <td>{elem.authors}</td>
-                      <td>
-                        <span
-                          className={`${elem.status} ${isEditor}`}
-                          onClick={() => onStatusClick(elem)}
-                        >
-                          {elem.status}
-                        </span>
-                      </td>
                       <td>
                         <button onClick={() => openFile(elem, "pdfFile")}>
                           Open
@@ -127,6 +164,14 @@ const Papers = () => {
                         <button onClick={() => openFile(elem, "copyrightFile")}>
                           Open
                         </button>
+                      </td>
+                      <td>
+                        <span
+                          className={`${elem.status} ${isEditor}`}
+                          onClick={() => onStatusClick(elem)}
+                        >
+                          {elem.status}
+                        </span>
                       </td>
                     </tr>
                   );

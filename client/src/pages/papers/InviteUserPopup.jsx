@@ -44,7 +44,7 @@ const ModalWindow = (props) => {
     return (
       <form onSubmit={handleSubmit} className="modalContainer">
         <div className="modalItem">
-          <label htmlFor="to">Name of the invitee: </label>
+          <label htmlFor="to">Username of the invitee: </label>
           <input
             required
             type="text"
@@ -56,14 +56,14 @@ const ModalWindow = (props) => {
         </div>
         <div className="modalItem">
           <label htmlFor="desc">Message to the invitee: </label>
-          <input
+          <textarea
             required
             type="text"
             id="message"
             name="message"
             className="modalInput"
             onChange={handleChange}
-          />
+          ></textarea>
         </div>
         <div className="modalItem">
           <label htmlFor="role">Role of the invitee: </label>

@@ -6,7 +6,7 @@ const paperSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    desc: {
+    abstract: {
       type: String,
       required: true,
     },

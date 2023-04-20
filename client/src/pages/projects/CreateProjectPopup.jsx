@@ -24,7 +24,6 @@ const ModalWindow = (props) => {
           ...prev,
           [e.target.id]: e.target.value,
         }));
-    console.log(newProjectData);
   };
 
   const handleSubmit = async (e) => {
@@ -62,13 +61,14 @@ const ModalWindow = (props) => {
         </div>
         <div className="modalItem">
           <label htmlFor="desc">Description of the project: </label>
-          <input
+          <textarea
             required
             type="text"
             id="desc"
             name="desc"
             className="modalInput"
             onChange={handleChange}
+            row="4"
           />
         </div>
         <div className="modalItem">

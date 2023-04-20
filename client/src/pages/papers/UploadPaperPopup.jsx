@@ -11,7 +11,7 @@ const ModalWindow = (props) => {
 
   const [uploadData, setUploadData] = useState({
     name: undefined,
-    desc: undefined,
+    abstract: undefined,
     authors: undefined,
   });
 
@@ -120,15 +120,16 @@ const ModalWindow = (props) => {
           />
         </div>
         <div className="modalItem">
-          <label htmlFor="desc">Description: </label>
-          <input
+          <label htmlFor="abstract">Abstract: </label>
+          <textarea
             required
             type="text"
-            id="desc"
-            name="desc"
+            id="abstract"
+            name="abstract"
             className="modalInput"
             onChange={handleChange}
-          />
+            rows="4"
+          ></textarea>
         </div>
         <div className="modalItem">
           <label htmlFor="authors">Authors: </label>

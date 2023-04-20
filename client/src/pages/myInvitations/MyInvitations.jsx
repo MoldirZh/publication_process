@@ -22,6 +22,30 @@ const MyInvitations = () => {
       <div className="page">
         <div className="container">
           <h2 className="header">My invitations</h2>
+          <div className="userManual">
+            <p>
+              Here you can view all the invitations that you received. The
+              invitations have the following statuses:
+            </p>
+            <ul>
+              <li>
+                <b>Awaiting</b> - the invitation is awaiting acceptance or
+                rejection.
+              </li>
+              <li>
+                <b>Accepted</b> - the invitation was accepted. You were added to
+                the list of the contributors of the project.
+              </li>
+              <li>
+                <b>Rejected</b> - the invitation was rejected.
+              </li>
+            </ul>
+            <br />
+            <p>
+              You can change the status of the invitation by clicking on the
+              status.
+            </p>
+          </div>
           <ViewInvitationPopup
             isPopupVisible={isPopupVisible}
             setIsPopupVisible={setIsPopupVisible}
@@ -30,7 +54,7 @@ const MyInvitations = () => {
           <table id="invitationsTable">
             <thead>
               <tr>
-                <th>Invitation #</th>
+                <th>#</th>
                 <th>From</th>
                 <th>Message</th>
                 <th>Project</th>

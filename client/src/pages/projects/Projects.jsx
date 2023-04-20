@@ -23,6 +23,25 @@ const Projects = () => {
       <div className="page">
         <div className="container">
           <h2 className="header">My Projects</h2>
+          <div className="userManual">
+            <p>
+              You can start working on a new project as an editor by clicking on
+              the “Create new project” button.
+            </p>
+            <br />
+            <p>The projects have the following statuses:</p>
+            <ul>
+              <li>
+                <b>In progress</b> - when the project is started.
+              </li>
+              <li>
+                <b>Completed</b> - when the project finished and checked by the
+                editors.
+              </li>
+            </ul>
+            <br />
+            <p>Click on the project's name to see the uploaded papers.</p>
+          </div>
           <button
             className="createProjectBtn"
             onClick={() => setIsPopupVisible(true)}
@@ -36,7 +55,7 @@ const Projects = () => {
           <table>
             <thead>
               <tr>
-                <th>Project #</th>
+                <th>#</th>
                 <th>Name</th>
                 <th>Editors</th>
                 <th>Progress</th>
