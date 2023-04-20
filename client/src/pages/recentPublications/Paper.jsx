@@ -40,7 +40,7 @@ const RecentPublicationsPaper = () => {
                     Open PDF
                   </button>
                   <h3>Abstract: </h3>
-                  <div className="paperDesc">{data.desc}</div>
+                  <div className="paperDesc">{data.abstract}</div>
                 </div>
               </>
             )}

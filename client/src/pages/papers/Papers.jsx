@@ -40,10 +40,11 @@ const Papers = () => {
     }
   };
 
-  const completeProject = () => {
-    console.log("complete");
-    //change status to completed
-    //generate proceeding, upload it to firebase and update the project db
+  const completeProject = async () => {
+    await axios.put(`/server/projects/${id}`, {
+      progress: "Completed",
+    });
+    window.location.reload();
   };
 
   return (
@@ -114,7 +115,7 @@ const Papers = () => {
             </button>
           </div>
           <div className="buttonsContainer">
-            {data && isEditor && (
+            {data && data.progress !== "Completed" && isEditor && (
               <button className="completeProjectBtn" onClick={completeProject}>
                 Complete project
               </button>
